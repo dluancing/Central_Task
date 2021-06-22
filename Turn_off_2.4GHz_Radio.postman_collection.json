@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "9e8f1d20-874b-41dc-916b-f0720acb2106",
+		"name": "Turn_off_2.4GHz_Radio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "refresh_token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"refresh_token\", pm.response.json().refresh_token);",
+							"pm.environment.set(\"access_token\", pm.response.json().access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"client_id\": \"{{client_id}}\",\n    \"client_secret\": \"{{client_secret}}\",\n    \"grant_type\": \"refresh_token\",\n    \"refresh_token\": \"{{refresh_token}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/oauth2/token",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ap_settings",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"achannel\", pm.response.json().achannel);",
+							"pm.environment.set(\"atxpower\", pm.response.json().atxpower);",
+							"pm.environment.set(\"dot11a_radio_disable\", pm.response.json().dot11a_radio_disable);",
+							"pm.environment.set(\"dot11g_radio_disable\", pm.response.json().dot11g_radio_disable);",
+							"pm.environment.set(\"gchannel\", pm.response.json().gchannel);",
+							"pm.environment.set(\"gtxpower\", pm.response.json().gtxpower);",
+							"pm.environment.set(\"ip_address\", pm.response.json().ip_address);",
+							"pm.environment.set(\"usb_port_disable\", pm.response.json().usb_port_disable);",
+							"pm.environment.set(\"zonename\", pm.response.json().zonename);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/configuration/v2/ap_settings/{{SERIAL}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"configuration",
+						"v2",
+						"ap_settings",
+						"{{SERIAL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST ap_settings",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"achannel\": \"{{achannel}}\",\n\t\"atxpower\": \"{{atxpower}}\",\n\t\"dot11a_radio_disable\": {{dot11a_radio_disable}},\n\t\"dot11g_radio_disable\": true,\n\t\"gchannel\": \"{{gchannel}}\",\n\t\"gtxpower\": \"{{gtxpower}}\",\n    \"hostname\": \"{{DEVICE NAME}}\",\n    \"ip_address\": \"{{ip_address}}\",\n    \"usb_port_disable\": {{usb_port_disable}},\n    \"zonename\": \"{{zonename}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/configuration/v2/ap_settings/{{SERIAL}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"configuration",
+						"v2",
+						"ap_settings",
+						"{{SERIAL}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "client_id",
+			"value": "gzpWDdULl7G8wG6vLOhY4DiOF1y0wh23"
+		},
+		{
+			"key": "client_secret",
+			"value": "CjPhAUwBvbc4LFQinBU4AH8NJ4wm7gms"
+		},
+		{
+			"key": "refresh_token",
+			"value": "9h46Ux7wDBa2BILMhHtJNBI91GlW5Bdd"
+		},
+		{
+			"key": "base_url",
+			"value": "https://internal-apigw.central.arubanetworks.com"
+		}
+	]
+}
